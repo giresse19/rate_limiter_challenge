@@ -1,0 +1,42 @@
+{
+  "name": "outvio-challenge",
+  "version": "1.0.0",
+  "description": "Example API, with rate limiter written for Outvio challenge",
+  "main": "src/server.js",
+  "scripts": {
+    "test": "mocha --timeout 5000",
+    "start": "node src/server.js",
+    "docker.dev": "docker-compose build --build-arg DOCKER_ENV=\"development\" && docker-compose up -d",
+    "docker.test": "docker-compose build --build-arg DOCKER_ENV=\"test\" && docker-compose up -d",
+    "docker.prod": "docker-compose build --build-arg DOCKER_ENV=\"production\" && docker-compose up -d",
+    "clear-limits": "docker-compose down -v"
+  },
+  "engines": {
+    "node": "^16.13.2",
+    "npm": "^8.4.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "author": "Giresse Ashu-Bob",
+  "license": "MIT",
+  "bugs": {
+    "url": ""
+  },
+  "homepage": "",
+  "dependencies": {
+    "axios": "^0.25.0",
+    "dotenv": "^14.3.2",
+    "express": "^4.16.2",
+    "moment": "^2.29.1",
+    "mongoose": "^6.1.8",
+    "redis": "^3.0.2"
+  },
+  "devDependencies": {
+    "chai": "^4.3.6",
+    "mocha": "^9.2.0",
+    "supertest": "^6.2.2",
+    "winston": "^3.5.0"
+  }
+}
