@@ -48,6 +48,7 @@ All scripts can be found in package.json.
 | Initialize DB | http://localhost:8000/internal/initialize
 | Show DB | http://localhost:8000/internal/db
 | Show Logs | http://localhost:8000/internal/logs
+| Delete user's request count | http://localhost:8000/api/v1/delete-user-request-count
 | show rich companies | http://localhost:8000/api/v1/rich-companies?countryCode=EE&category=IT
 
 ## Folder structure
@@ -105,6 +106,10 @@ All scripts can be found in package.json.
 
 ### src/service/richCompanies.js
 * Filter companies base on budget
+* Contains only one exported service (see `module.exports = `)
+
+### src/service/deleteUserRequestCount.js
+* Deletes user's request count from redis
 * Contains only one exported service (see `module.exports = `)
  
  ### src/utils/initRedis.js
