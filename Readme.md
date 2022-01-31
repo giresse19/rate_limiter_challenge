@@ -15,7 +15,7 @@ Different end-points were provided inorder to demonstrate that rate-limiting wil
 Inorder to run locally: 
 
 ```sh
-git clone git@github.com:giresse19/rate_limiter_outvio.git
+git clone git@github.com:giresse19/rate_limiter_challenge.git
 cd outvio-challenge
 npm install
 To run in default env(also known as development env): docker-compose up --build
