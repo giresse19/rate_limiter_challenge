@@ -30,7 +30,7 @@ module.exports = {
       {CompanyID: 'C7', Countries: 'EE', Budget: 7, Categories: 'Automobile'},
       {CompanyID: 'C8', Countries: 'CM', Budget: 8, Categories: 'IT,Automobile'},
       {CompanyID: 'C9', Countries: 'LV', Budget: 9, Categories: 'Entertainment'},
-      {CompanyID: 'C10', Countries: 'DE', Budget: 10, Categories: 'IT,Automobile'},
+      {CompanyID: 'C10',Countries: 'DE', Budget: 10, Categories: 'IT,Automobile'},
 
     ]).then(() => {
       this.log('Database initialized');
