@@ -5,9 +5,13 @@ This program is built for Outvio application challenge.
 * An API(random, since no specific was demanded) was created using Node.js(express) and MongoDB inorder to demonstrate rate limiting. 
 * Rate limiting was implemented using Redis. Redis was used to store number of request send by user.
 * User identity was done base on user's IP address.
-* Algorithm for rate-limiting implementation is the sliding window algorithm.
+* The algorithm used is sliding window. This algorithm was used to keep track of each user’s request count per hour,
+ while grouping them by a fixed 5 minutes window(`for memory optimization`).
+* A possible limitation to the algorithm is that, if a huge number (for example 10000) of concurrent request
+ from a given user is being send out, the algorithm considers it all as a single request.
+* `Locks or Mutex` a technique to handle that limitation. (see `https://en.wikipedia.org/wiki/Lock_(computer_science)`) is not
+ implemented by choice, `due to performance reasons(that is, the service is more performant without locks implementation)`.
 * Different end-points were provided inorder to demonstrate that rate-limiting will work per user, irrespective of end-point used.
-
 
 ** NOTE: For the purpose of simplicity in running the app, the .env files were publish to the repo. This however, should not be the case in real running application.
 
@@ -25,11 +29,8 @@ cd  rate_limiter_challenge
 * To run in production env: `docker-compose build --build-arg DOCKER_ENV="production" && docker-compose up -d` or `npm run docker.prod`
 
 ## Running the end-to-end test
-* The test is designed to run only in `development environment` 
-* Ensure you have not send any previous request manually to the API before, otherwise, see `Clear cached limits` below. So basically, you can send upto the maximum value of request in development
-environment, in this case a value `100`.
-* The reason to ensure no request has been send before is because, development ENV has a limit of `100`(as configured) but the test sends `101` requests and expects `one response to contains HTTP status code 429`
-* If conditions above are met, just run: `npm run test`
+* For simplicity, the test is configured currently to be ran `only` in `development environment` 
+* If conditions above is met, just run: `npm run test`
 
 ## Clear cached limits
 * To clear cached limits : `docker-compose down -v` or `npm run clear-limits`
@@ -113,9 +114,9 @@ All scripts can be found in package.json.
 * provides logging for the whole server application.
 
 ### test/rateLimiterTest.js
-* Contains a simple end-to-end test for rate limiting.
+* Contains a simple end-to-end test for rate limiting with different API end-points.
 
 ### test/utils/callApi.js
-* Calls an endpoint one time more than limit for development ENV.
+* utility functions used by `rateLimiterTest`
 
 
