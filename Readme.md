@@ -9,9 +9,9 @@ This program is built for Outvio application challenge.
  while grouping them by a fixed 5 minutes window(`for memory optimization`).
 * A possible limitation to the algorithm is that, if a huge number (for example 10000) of concurrent request
  from a given user is being send out, the algorithm considers it all as a single request.
-* `Locks or Mutex` a technique to handle that limitation. (see `https://en.wikipedia.org/wiki/Lock_(computer_science)`) is not
- implemented by choice, `due to performance reasons(that is, the service is more performant without locks implementation)`.
-* Different end-points were provided inorder to demonstrate that rate-limiting will work per user, irrespective of end-point used.
+* `Locks or Mutex` a technique to handle that limitation. (see https://en.wikipedia.org/wiki/Lock_(computer_science)) is not
+ implemented by choice, `due to performance reasons(that is, the API is more performant without Mutex implementation)`.
+* Different end-points were provided inorder to demonstrate that rate-limiting will work per user, irrespective of end-point used(see test).
 
 ** NOTE: For the purpose of simplicity in running the app, the .env files were publish to the repo. This however, should not be the case in real running application.
 
