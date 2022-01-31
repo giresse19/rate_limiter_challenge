@@ -57,18 +57,18 @@ All scripts can be found in package.json.
 ### src/server.js
 * Main entrance point, also defined as this on `package.json`
 * Catches all exceptions and logs, preventing errors to crash process
-* Uses `process.env.PORT` (heroku standard) to define listen port, fallbacks to `8000`
+* Uses `process.env.PORT` to define listen port, fallbacks to `8000`
 
 ### src/config.js
 * Main entry used to provide different variables base on environment
-* Provides default in case of no environment specification
+* Provides default values in case no environment specified
 * Contains only one exported service which provides environment variables to the app(see `module.exports = `)
 
 ### src/app.js
 * Isolated Express App (without the server)
-* It has two custom middleware that
+* It has two custom middlewares:
   * One of which Sets response header for JSON and Creates a function to return APIs in `{status:200, data: ...}` format
-  * The other(rateLimiter) which limits the number of request made to all endpoints by user IP address.
+  * The other(rateLimiter) which limits the number of request made to all endpoints by user's IP address.
 * It has a public API which uses `richCompanies` service
 * It has 3 internal functions for db reset, show db and show logs
 * It has a fallback route for 404
@@ -91,7 +91,7 @@ All scripts can be found in package.json.
 * DB tasks like `initialize`, and `log` are defined here
 
 ### src/service/richCompanies.js
-* Filter companies and return
+* Filter companies base on budget
 * Contains only one exported service (see `module.exports = `)
  
  ### src/utils/initRedis.js
@@ -105,6 +105,6 @@ All scripts can be found in package.json.
 * Contains a simple end-to-end test for rate limiting.
 
 ### test/utils/callApi.js
-* utils file which calls endpoint a specific number of time.
+* Calls an endpoint one time more than limit for development ENV.
 
 
