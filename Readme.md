@@ -12,21 +12,30 @@ This program is built for Outvio application challenge.
 
 ## Running Locally
 
-Inorder to run locally: 
+* Inorder to run locally, you need to have Docker if you wish to run in Docker, OR install Node(^16 version) and Npm(^8).
 
 ```sh
 git clone git@github.com:giresse19/rate_limiter_challenge.git
-cd outvio-challenge
-npm install
-To run in default env(also known as development env): docker-compose up --build
-To run in development env: npm run docker.dev
-To run in test env: npm run docker.test
-To run in production env: npm run docker.prod
-To run test: npm run test
-To clear cached limits : npm run clear-limits
-To view running containers: docker ps
-To view specific container logs: docker logs [container_id]
+cd  rate_limiter_challenge
 ```
+* To run in default env(also known as development env): `docker-compose up --build`
+* To run in development env: `docker-compose build --build-arg DOCKER_ENV="development" && docker-compose up -d` or `npm run docker.dev`
+* To run in test env: `docker-compose build --build-arg DOCKER_ENV="test" && docker-compose up -d` or `npm run docker.test`
+* To run in production env: `docker-compose build --build-arg DOCKER_ENV="production" && docker-compose up -d` or `npm run docker.prod`
+
+## Running the end-to-end test
+* In order to run the test, ensure you are running the app in `development environment`, 
+* Ensure you have not send any previous request manually to the API before, otherwise, see `Clear cached limits` below.
+* The reason to ensure no request has been send before is because, development ENV has a limit of `100` and the test checks for a limit of `101` expects `one response to contains HTTP code 429`
+* Then run: `npm run test`
+
+## Clear cached limits
+* To clear cached limits : `docker-compose down -v` or `npm run clear-limits`
+
+## Container utils
+* To view running containers: `docker ps`
+* To view specific container logs: `docker logs [container_id]`
+
 
 All scripts can be found in package.json.
 
