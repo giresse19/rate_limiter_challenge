@@ -16,8 +16,9 @@ npm install
 To run in default env(also known as development env): docker-compose up --build
 To run in development env: npm run docker.dev
 To run in test env: npm run docker.test
+To run in production env: npm run docker.prod
 To run test: npm run test
-To clear limits : npm run clear-limits
+To clear cached limits : npm run clear-limits
 To view running containers: docker ps
 To view specific container logs: docker logs [container_id]
 ```
@@ -71,6 +72,7 @@ All scripts can be found in package.json.
 ### src/middleware/rateLimiterTest.js
 * Main rate limiter logic is here
 * Rate limiting implementation is base on sliding window algorithm
+* imports a running redis client instance, from `utils/initRedis.js`.
 * Contains only one exported service (see `module.exports = `)
 * All subroutines are separated as functions including **Checks** and **Data conversions**
 
