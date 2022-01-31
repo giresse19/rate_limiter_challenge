@@ -24,9 +24,10 @@ cd  rate_limiter_challenge
 * To run in production env: `docker-compose build --build-arg DOCKER_ENV="production" && docker-compose up -d` or `npm run docker.prod`
 
 ## Running the end-to-end test
-* In order to run the test, ensure you are running the app in `development environment`, 
-* Ensure you have not send any previous request manually to the API before, otherwise, see `Clear cached limits` below.
-* The reason to ensure no request has been send before is because, development ENV has a limit of `100` and the test checks for a limit of `101` expects `one response to contains HTTP code 429`
+* The test is designed to run only in `development environment`, 
+* Ensure you have not send any previous request manually to the API before, otherwise, see `Clear cached limits` below. So basically, you can send upto the maximum value of request in development
+environment, in this case a value `100`.
+* The reason to ensure no request has been send before is because, development ENV has a limit of `100`(as configured) but the test sends `101` requests and expects `one response to contains HTTP status code 429`
 * Then run: `npm run test`
 
 ## Clear cached limits
