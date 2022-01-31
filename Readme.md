@@ -89,7 +89,6 @@ All scripts can be found in package.json.
 ### src/service/richCompanies.js
 * Filter companies and return
 * Contains only one exported service (see `module.exports = `)
-* All subroutines are separated as functions including **Checks** and **Data
  
  ### src/utils/initRedis.js
 * Redis Initialization starts here and only exported to `rateLimiter.js` file to be used.

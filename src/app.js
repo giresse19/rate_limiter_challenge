@@ -6,7 +6,7 @@ const logger = require('./utils/logger');
 const express = require('express');
 const app = express();
 
-logger.info("current ENV: ", process.env.NODE_ENV)
+console.log("current env: ", process.env.NODE_ENV)
 
 app.use((req, res, next) => {
   res.setHeader('Content-Type', 'application/json');
