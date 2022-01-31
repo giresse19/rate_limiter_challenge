@@ -114,7 +114,7 @@ All scripts can be found in package.json.
 * Contains only one exported service (see `module.exports = `)
  
  ### src/utils/initRedis.js
-* Redis Initialization starts here and only exported to `rateLimiter.js` file to be used.
+* Redis Initialization starts here and only exported to `rateLimiter.js` and `deleteUserRequestCount` file to be used.
 * logs different event listeners upon redis start and stop. 
 
 ### src/utils/logger.js
