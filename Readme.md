@@ -68,7 +68,7 @@ All scripts can be found in package.json.
 * It has a fallback route for 404
 * It has an Error route to catch uncaught errors
 
-### src/middleware/rateLimiter.js
+### src/middleware/rateLimiterTest.js
 * Main rate limiter logic is here
 * Rate limiting implementation is base on sliding window algorithm
 * Contains only one exported service (see `module.exports = `)
@@ -86,6 +86,19 @@ All scripts can be found in package.json.
 ### src/service/richCompanies.js
 * Filter companies and return
 * Contains only one exported service (see `module.exports = `)
-* All subroutines are separated as functions including **Checks** and **Data conversions*
+* All subroutines are separated as functions including **Checks** and **Data
+ 
+ ### src/utils/initRedis.js
+* Redis Initialization starts here and only exported to `rateLimiter.js` file to be used.
+* logs different event listeners upon redis start and stop. 
+
+### src/utils/logger.js
+* provides logging for the whole server application.
+
+### test/rateLimiterTest.js
+* Contains a simple end-to-end test for rate limiting.
+
+### test/utils/callApi.js
+* utils file which calls endpoint a specific number of time.
 
 

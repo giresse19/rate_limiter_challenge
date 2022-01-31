@@ -1,11 +1,12 @@
 const db = require('./database/db');
 const richCompanies = require('./service/richCompanies');
 const rateLimiter = require('./middlewares/rateLimiter');
+const logger = require('./utils/logger');
 
 const express = require('express');
 const app = express();
 
-console.log("current ENV: ", process.env.NODE_ENV);
+logger.info("current ENV: ", process.env.NODE_ENV)
 
 app.use((req, res, next) => {
   res.setHeader('Content-Type', 'application/json');
