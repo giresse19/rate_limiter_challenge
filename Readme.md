@@ -4,6 +4,7 @@ This program is built for Outvio application challenge.
 
 An API(random, since no specific was demanded) was created using Node.js(express) and MongoDB  inorder to demonstrate rate limiting. 
 
+** NOTE: For the purpose of simplicity in running the app, the .env files were publish to the repo. This however, should not be the case in real running application.
 
 ## Running Locally
 
