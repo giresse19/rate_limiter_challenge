@@ -1,6 +1,6 @@
 const db = require('./database/db');
 const richCompanies = require('./service/richCompanies');
-
+const rateLimiter = require('./middlewares/rateLimiter');
 
 const express = require('express');
 const app = express();
@@ -20,6 +20,7 @@ app.use((req, res, next) => {
   next();
 });
 
+app.use((req, res, next) => rateLimiter(req, res, next, res.apiResponse));
 
 app.get('/api/v1/rich-companies', (req, res) =>
   richCompanies(req.query.countryCode, req.query.category, res.apiResponse)
