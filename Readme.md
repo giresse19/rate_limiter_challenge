@@ -17,7 +17,7 @@ This program is built for Outvio application challenge.
 
 ## Running Locally
 
-* Inorder to run locally, you need to have Docker if you wish to run in Docker, OR install Node(^16 version) and Npm(^8).
+* Inorder to run locally, you need to have Docker if you wish to run in Docker(however, npm is needed to run automated test), OR install Node(^16 version) and Npm(^8).
 
 ```sh
 git clone git@github.com:giresse19/rate_limiter_challenge.git
