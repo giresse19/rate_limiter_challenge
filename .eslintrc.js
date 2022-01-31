@@ -4,7 +4,8 @@ module.exports = {
     "node": true,
     "es6": true
   },
-  "extends": ["eslint:recommended"],
+  "extends": ["eslint:recommended", "prettier"],
+  "plugins": ["prettier"],
   "rules": {
     "indent": ["error", 2,],
     "semi": ["error", "always"],
@@ -19,7 +20,6 @@ module.exports = {
     "no-octal": ["error"], // Octal literals should not be used
     "no-redeclare": ["error"], // '...' is already defined
     "no-unused-vars": ["error"], // '...' is assigned a value but never used
-    "singleQuote": true,
-    "tabWidth": 2
+    "prettier/prettier": "error"
   },
 };

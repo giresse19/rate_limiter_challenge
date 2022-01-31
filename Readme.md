@@ -89,8 +89,9 @@ All scripts can be found in package.json.
 ### src/middleware/rateLimiterTest.js
 * Main rate limiter logic is here
 * Rate limiting implementation is base on sliding window algorithm
-* imports a running redis client instance, from `utils/initRedis.js`.
+* imports a running redis client instance, from `utils/initRedis.js`
 * Contains only one exported service (see `module.exports = `)
+* Adds a `Retry-After` to the header when limit reached
 * All subroutines are separated as functions including **Checks** and **Data conversions**
 
 ### src/database/models.js

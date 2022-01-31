@@ -17,12 +17,12 @@
   },
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "git@github.com:giresse19/rate_limiter_challenge.git"
   },
   "author": "Giresse Ashu-Bob",
   "license": "MIT",
   "bugs": {
-    "url": ""
+    "url": "https://github.com/giresse19/rate_limiter_challenge/issues"
   },
   "homepage": "",
   "dependencies": {
@@ -35,7 +35,10 @@
   },
   "devDependencies": {
     "chai": "^4.3.6",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-prettier": "^4.0.0",
     "mocha": "^9.2.0",
+    "prettier": "^2.5.1",
     "winston": "^3.5.0"
   }
 }

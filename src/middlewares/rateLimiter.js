@@ -38,7 +38,7 @@ module.exports = (req, res, next, callback) => {
   try {
     redisClient.get(req.ip, (err, record) => {
 
-      if (err) logger.error("Error getting user record: ", err);
+      if (err) logger.error('Error getting user record: ', err);
 
       const currentRequestTime = moment();
       creatRecordIfNone(record, req, currentRequestTime, next);
