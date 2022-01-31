@@ -30,7 +30,7 @@ cd  rate_limiter_challenge
 
 ## Running the end-to-end test
 * For simplicity, the test is configured currently to be ran `only` in `development environment` 
-* If conditions above is met, just run: `npm run test`
+* If point one above is met, just run: `npm run test`
 
 ## Clear cached limits
 * To clear cached limits : `docker-compose down -v` or `npm run clear-limits`
@@ -64,6 +64,7 @@ All scripts can be found in package.json.
 | `.env.test` | contains all test specific environment variable 
 | `.env.production` | contains all prod specific environment variable 
 | `LICENSE` | MIT License file
+| `prettier.config` | Contains additional rules to help enforce clean code standards
 | `Readme.md` | This file
 | `package.json` | NPM data including node and npm engine versions. Also contains script to run the app
 
