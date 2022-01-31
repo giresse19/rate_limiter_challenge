@@ -4,12 +4,11 @@ module.exports = {
     "node": true,
     "es6": true
   },
-  "extends": "eslint:recommended",
+  "extends": ["eslint:recommended"],
   "rules": {
     "indent": ["error", 2,],
     "semi": ["error", "always"],
     "comma-dangle": ["error", "never"],
-
     "no-constant-condition": ["error"], // Unexpected constant condition
     "no-undef": ["error"], // '...' is not defined
     "no-unreachable": ["error"], // Unreachable code
@@ -20,6 +19,7 @@ module.exports = {
     "no-octal": ["error"], // Octal literals should not be used
     "no-redeclare": ["error"], // '...' is already defined
     "no-unused-vars": ["error"], // '...' is assigned a value but never used
-    "semi": ["error"], // Missing semicolon
-  }
+    "singleQuote": true,
+    "tabWidth": 2
+  },
 };

@@ -1,4 +1,4 @@
-const config = require('../config')
+const config = require('../config');
 const moment = require('moment');
 const logger = require('../utils/logger');
 const redisClient = require('../utils/initRedis');
@@ -33,6 +33,13 @@ const alertPossibleDdosAttack = (envRequestLimit, totalWindowRequestsCount, req)
   }
 }
 
+/*
+* The algorithm used is sliding window. This algorithm was used to keep track of each user’s request count
+* per hour while grouping them by a fixed 5 minutes window(due to memory optimization).
+* A possible limitation to the algorithm is that, if a huge number (for example 10000) of concurrent request
+* from the same user is being send out, the algorithm considers it all as a single request.
+* However, locks(a technique to handle that limitation) are  not implemented due to performance reasons.
+*/
 module.exports = (req, res, next, callback) => {
 
   try {
