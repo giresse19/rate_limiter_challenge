@@ -5,6 +5,7 @@ This program is built for Outvio application challenge.
 * An API(random, since no specific was demanded) was created using Node.js(express) and MongoDB inorder to demonstrate rate limiting. 
 * Rate limiting was implemented using Redis. Redis was used to store number of request send by user.
 * User identity was done base on user's IP address.
+* Algorithm for rate-limiting implementation is the sliding window algorithm.
 * Different end-points were provided inorder to demonstrate that rate-limiting will work per user, irrespective of end-point used.
 
 
@@ -24,11 +25,11 @@ cd  rate_limiter_challenge
 * To run in production env: `docker-compose build --build-arg DOCKER_ENV="production" && docker-compose up -d` or `npm run docker.prod`
 
 ## Running the end-to-end test
-* The test is designed to run only in `development environment`, 
+* The test is designed to run only in `development environment` 
 * Ensure you have not send any previous request manually to the API before, otherwise, see `Clear cached limits` below. So basically, you can send upto the maximum value of request in development
 environment, in this case a value `100`.
 * The reason to ensure no request has been send before is because, development ENV has a limit of `100`(as configured) but the test sends `101` requests and expects `one response to contains HTTP status code 429`
-* Then run: `npm run test`
+* If conditions above are met, just run: `npm run test`
 
 ## Clear cached limits
 * To clear cached limits : `docker-compose down -v` or `npm run clear-limits`
