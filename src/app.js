@@ -1,7 +1,6 @@
 const db = require('./database/db');
 const richCompanies = require('./service/richCompanies');
 const rateLimiter = require('./middlewares/rateLimiter');
-const logger = require('./utils/logger');
 
 const express = require('express');
 const app = express();
