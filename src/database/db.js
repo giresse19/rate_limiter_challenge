@@ -5,6 +5,8 @@ module.exports = {
 
   getCompanies: (callback) => models.Company.find({}, callback),
 
+  getUsers: (callback) => models.User.find({}, callback),
+
   log: (message) => {
     let record = new models.Log({message});
     record.save()
@@ -13,10 +15,10 @@ module.exports = {
   },
 
   initialize: function (callback) {
-    models.Company.remove({}, (err) => {
+    models.Company.deleteMany({}, (err) => {
       if (err) return void callback(err);
     });
-    models.Log.remove({}, (err) => {
+    models.Log.deleteMany({}, (err) => {
       if (err) return void callback(err);
     });
 

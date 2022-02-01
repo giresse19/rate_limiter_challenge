@@ -3,6 +3,10 @@ const moment = require('moment');
 const logger = require('../utils/logger');
 const redisClient = require('../utils/initRedis');
 
+const getKey = (req) => {
+  return req.token ? req.token + req.ip : req.ip
+}
+
 const getRetryAfter = (requestTimeStamp) => requestTimeStamp + parseInt(config.SECONDS) * parseInt(config.RETRY_DURATION_IN_MINUTES);
 
 const rateLimitReached = (envRequestLimit, lastRequestLog, totalWindowRequestsCount, res, callback) => {
@@ -14,13 +18,15 @@ const rateLimitReached = (envRequestLimit, lastRequestLog, totalWindowRequestsCo
 
 const creatRecordIfNone = (existingRecord, req, currentRequestTime, next) => {
   if (existingRecord === null) {
+
     let newRecord = [];
     let requestLog = {
       requestTimeStamp: currentRequestTime.unix(),
       requestCount: 1
     };
+
     newRecord.push(requestLog);
-    redisClient.set(req.ip, JSON.stringify(newRecord));
+    redisClient.set(getKey(req), JSON.stringify(newRecord));
     next();
   }
 }
@@ -28,15 +34,15 @@ const creatRecordIfNone = (existingRecord, req, currentRequestTime, next) => {
 // For insights into user behavior and to alert of possible malicious attacks.
 const alertPossibleDdosAttack = (envRequestLimit, totalWindowRequestsCount, req) => {
   if (totalWindowRequestsCount >= envRequestLimit - parseInt(config.THRESHOLD_NUMBER_TO_ALERT)) {
-    logger.warn(`User with ip: ${req.ip} seems to be reaching limit quickly, check user activity.`
+    logger.warn(`User with key: ${getKey(req)} seems to be reaching limit quickly, check user activity.`
     );
   }
 }
 
-module.exports = (req, res, next, callback) => {
+module.exports = async (req, res, next, callback) => {
 
-  try {
-    redisClient.get(req.ip, (err, record) => {
+    try {
+    redisClient.get(getKey(req), async(err, record) => {
 
       if (err) logger.error('Error getting user record: ', err);
 
@@ -71,7 +77,7 @@ module.exports = (req, res, next, callback) => {
           });
         }
 
-        redisClient.set(req.ip, JSON.stringify(userRecord));
+        redisClient.set(getKey(req), JSON.stringify(userRecord));
         next();
       }
     })
