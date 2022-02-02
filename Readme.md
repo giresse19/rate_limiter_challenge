@@ -1,12 +1,12 @@
 # Outvio API Rate Limiter
 
-This program is built for Outvio application challenge.
+This program was built for Outvio application challenge.
 
-* An API(random, since no specific was demanded) was created using Node.js(express) and MongoDB inorder to demonstrate rate limiting. 
-* Rate limiting is implemented using Redis. Redis was used to store number of request send by user.
+* An API(random, since the task specified none) was created using Node.js(express) and MongoDB inorder to demonstrate rate limiting. 
+* Rate limiting is implemented using Redis. Redis is used to store number of request send by user.
 * User identity is done base on user's IP address and jwt token for protected routes. For non-protected routes,
 only base on IP address.
-* The algorithm used is sliding window. This algorithm was used to keep track of each user’s request count per hour,
+* The algorithm used is sliding window. This algorithm is used to keep track of each user’s request count per hour,
  while grouping them by a fixed 5 minutes window(`for memory optimization`).
 * A possible limitation to the algorithm is that, if a huge number (for example 10000) of concurrent request
  from a given user is being send out, the algorithm considers it all as a single request.
