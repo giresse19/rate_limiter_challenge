@@ -45,12 +45,17 @@ All scripts can be found in package.json.
 
 | Purpose | URL
 | - | -
-| 404 page | http://localhost:8000/anypage
-| Initialize DB | http://localhost:8000/internal/initialize
-| Show DB | http://localhost:8000/internal/db
-| Show Logs | http://localhost:8000/internal/logs
-| Delete user's request count | http://localhost:8000/api/v1/delete-user-request-count
-| show rich companies | http://localhost:8000/api/v1/rich-companies?countryCode=EE&category=IT
+| 404 page (public route) | http://localhost:8000/anypage
+| register page (public route) | http://localhost:8000/api/v1/user/register
+| login page (public route) | http://localhost:8000/api/v1/user/login
+| Initialize DB (public route) | http://localhost:8000/internal/initialize
+| Delete user's request count (public route)| http://localhost:8000/internal/delete-user-request-count
+| Show Logs (public route) | http://localhost:8000/internal/logs
+| Show users (private route) | http://localhost:8000/api/v1/users
+| Show all companies (private route) | http://localhost:8000/api/v1/companies
+| show rich companies (private route) | http://localhost:8000/api/v1/rich-companies?countryCode=EE&category=IT
+| Delete user's request count (private route) | http://localhost:8000/api/v1/delete-user-request-count
+
 
 ## Folder structure
 

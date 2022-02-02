@@ -50,13 +50,6 @@ describe("PROTECTED GET REQUEST", () => {
     expect(throttledResponses.length).to.be.eq(0);
   });
 
-  it('it should get one  responses of status code 429 from getting companies ', async () => {
-    const responses = await shouldGetPrivate(`${BASE_URL}/api/v1/companies`, 2);
-    const throttledResponses = responses.filter((response) => response.status === 429);
-    console.log(throttledResponses.length)
-    expect(throttledResponses.length).to.be.eq(1);
-  });
-
 })
 
 
