@@ -86,21 +86,26 @@ All scripts can be found in package.json.
 
 ### src/app.js
 * Isolated Express App (without the server)
-* It has two custom middlewares:
+* It has three custom middlewares:
   * One of which Sets response header for JSON and Creates a function to return APIs in `{status:200, data: ...}` format
-  * The other(rateLimiter) which limits the number of request made to all endpoints by user's IP address.
+  * The other(auth) sets token to req object, to be accessed by the (rateLimiter).
+  * The final(rateLimiter) which limits the number of request made to all endpoints by user's auth token and/or Ip address.
 * It has a public API which uses `richCompanies` service
 * It has 3 internal functions for db reset, show db and show logs
 * It has a fallback route for 404
 * It has an Error route to catch uncaught errors
 
-### src/middleware/rateLimiterTest.js
+### src/middleware/rateLimiter.js
 * Main rate limiter logic is here
 * Rate limiting implementation is base on sliding window algorithm
 * imports a running redis client instance, from `utils/initRedis.js`
 * Contains only one exported service (see `module.exports = `)
 * Adds a `Retry-After` to the response header when limit  reached
 * All subroutines separated as functions including **Checks** and **Data conversions**
+
+### src/middleware/auth.js
+* Sets token on req object for private routes(to be accessed by second middleware)
+* Contains only one exported service (see `module.exports = `)
 
 ### src/database/models.js
 * Mongoose connection starts here

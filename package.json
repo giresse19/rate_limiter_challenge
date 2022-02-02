@@ -4,7 +4,7 @@
   "description": "Example API, with rate limiter written for Outvio challenge",
   "main": "src/server.js",
   "scripts": {
-    "test": "mocha --timeout 5000",
+    "test": "mocha --timeout 10000",
     "start": "node src/server.js",
     "docker.dev": "docker-compose build --build-arg DOCKER_ENV=\"development\" && docker-compose up -d",
     "docker.test": "docker-compose build --build-arg DOCKER_ENV=\"test\" && docker-compose up -d",
