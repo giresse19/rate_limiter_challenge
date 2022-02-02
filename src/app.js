@@ -1,7 +1,7 @@
 const db = require('./database/db');
 
 const richCompanies = require('./service/richCompanies');
-const deleteUserRequestCount = require('./service/deleteUserRequestCount');
+const {deleteWithIpAsKey, deleteWithIpAndTokenAsKey} = require('./service/deleteUserRequestCount');
 const rateLimiter = require('./middlewares/rateLimiter');
 const authenticate = require('./middlewares/auth');
 
@@ -46,19 +46,27 @@ app.get('/api/v1/companies',
   (req, res, next) => rateLimiter(req, res, next, res.apiResponse),
   (req, res) => db.getCompanies(res.apiResponse));
 
+// No rate limit middleware for delete user count route
+app.get('/api/v1/delete-user-request-count',
+  (req, res, next) => authenticate(req, res, next, res.apiResponse),
+  (req, res) => deleteWithIpAndTokenAsKey(req, res, res.apiResponse));
+
 
 // unprotected routes
-app.use((req, res, next) => rateLimiter(req, res, next, res.apiResponse));
+
+// No rate limit middleware for delete user count route, login and register
+app.get('/internal/delete-user-request-count',  (req, res) => deleteWithIpAsKey(req, req, res.apiResponse));
 
 app.use("/api/v1/user", register);
 
 app.use("/api/v1/user", login);
 
+app.use((req, res, next) => rateLimiter(req, res, next, res.apiResponse));
+
 app.get('/internal/logs', (req, res) => db.getLogs(res.apiResponse));
 
 app.get('/internal/initialize', (req, res) => db.initialize(res.apiResponse));
 
-app.get('/internal/delete-user-request-count',  (req, res) => deleteUserRequestCount(req, req, res.apiResponse));
 
 // error handler middlewares
 app.use((req, res) => res.apiResponse({status: 404, message: 'Page not found'}));

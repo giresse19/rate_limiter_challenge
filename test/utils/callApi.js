@@ -1,11 +1,9 @@
 const axios = require('axios');
-const BASE_URL = `http://localhost:8000`
-const MAX_WINDOW_REQUEST_COUNT_DEV = 100
+const login = require('./protecteRoute');
 
-const shouldGetRateLimitException = async (url) => {
+const shouldGetRateLimitException = async (url, number) => {
   const apiCalls = [];
-
-  for (let index = MAX_WINDOW_REQUEST_COUNT_DEV + 1; index > 0; index--) {
+  for (let index = number; index > 0; index--) {
     try {
       const responds = await axios.get(url);
       apiCalls.push(responds);
@@ -16,10 +14,9 @@ const shouldGetRateLimitException = async (url) => {
   return apiCalls;
 }
 
-const shouldNotGetRateLimitException = async (url) => {
+const shouldNotGetRateLimitException = async (url, number) => {
   const apiCalls = [];
-
-  for (let index = MAX_WINDOW_REQUEST_COUNT_DEV; index > 0; index--) {
+  for (let index = number; index > 0; index--) {
     try {
       const responds = await axios.get(url);
       apiCalls.push(responds);
@@ -31,12 +28,35 @@ const shouldNotGetRateLimitException = async (url) => {
   return apiCalls;
 }
 
-const deleteRequestCount = async () => {
-  return await axios.get(`${BASE_URL}/api/v1/delete-user-request-count`);
+const shouldGetPrivate = async (url, number) => {
+  const apiCalls = [];
+  const bearer = await login();
+  for (let index = number; index > 0; index--) {
+    try {
+      const responds = await axios.get(url, { headers: { "Authorization": `${bearer}` } })
+      apiCalls.push(responds);
+    } catch (e) {
+      apiCalls.push(e.response.data);
+    }
+  }
+
+  return apiCalls;
+}
+
+
+const deleteRequestCountWithIpAsKey = async (url) => {
+ return await axios.get(url);
+}
+
+const deleteRequestCountWithIpAndTokenAsKey = async (url) => {
+  const bearer = await login();
+ return await axios.get(url,  { headers: { "Authorization": `${bearer}`}  }) ;
 }
 
 module.exports = {
   shouldGetRateLimitException,
+  shouldGetPrivate,
   shouldNotGetRateLimitException,
-  deleteRequestCount
+  deleteRequestCountWithIpAsKey,
+  deleteRequestCountWithIpAndTokenAsKey,
 }
